@@ -1,0 +1,18 @@
+.button{
+    height: 40px;
+    width: 130px;
+    background: #FFB840;
+    border-radius: 10px;
+    color: white;
+    margin: 20px 20px;
+    font-family: "PT Sans";
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+}
+.button:hover{
+    background: #FFCB73;
+}
+.button:active{
+    background: #A66900;
+}
