@@ -7,5 +7,6 @@ export type ButtonNameType = {
 export const buttonName: Array<ButtonNameType> = [
     {id: v1(), name:"INC"},
     {id: v1(), name:"RESET"},
+    {id: v1(), name:"SAVE"},
 ]
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {ButtonNameType} from "../redux/state";
+import {ButtonNameType} from "../../redux/state";
 import s from "./CounterDisplay.module.css"
 
 type PropsType = {
