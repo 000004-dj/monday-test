@@ -1,24 +1,34 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import s from "./Counter.module.css"
 import {CounterDisplay} from "../CounterDisplay/CounterDisplay";
 import {Button} from "../Button/Button";
 import {buttonName} from "../../redux/state";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
+import {changeCounterNumberAC} from "../../redux/counter-reducer";
+
+
 
 
 export const Counter = () => {
-    const [number, setNumber] = useState(0)
+    // const [number, setNumber] = useState(0)
+
+
+    const {number} = useSelector<AppStateType, any>((state)=> state.counterReducer)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         let valueAsString = localStorage.getItem("counterValue")
         if (valueAsString) {
             let newValue = JSON.parse(valueAsString)
-            setNumber(newValue)
+            dispatch(changeCounterNumberAC(newValue))
         }
-    }, [])
+    }, [dispatch])
 
-    const getNextNumber = () => setNumber(number + 1)
-    const clearingResult = () => setNumber(number - number)
-    const buttonActivityReset = number ? false : true
+    const getNextNumber = () => dispatch(changeCounterNumberAC(number + 1))
+    const clearingResult = () => dispatch(changeCounterNumberAC(number - number))
+    const buttonActivityReset = !number
     const buttonDisabledINC = false
     const numberLimit = number >= 5 ? 5 : number
 
@@ -32,31 +42,22 @@ export const Counter = () => {
     return (
         <div className={s.counterParent}>
             <CounterDisplay
-                number={number}
-                buttonName={buttonName}
-                setNumber={setNumber}
-                changeNumber={getNextNumber}
                 numberLimit={numberLimit}/>
+
             <div>
                 <Button
                     buttonName={buttonName[0].name}
-                    number={number}
-                    setNumber={setNumber}
                     changeNumber={getNextNumber}
                     buttonActivity={buttonDisabledINC}
                     buttonClass={buttonClassINC}
                 />
                 <Button
                     buttonName={buttonName[1].name}
-                    number={number}
-                    setNumber={setNumber}
                     changeNumber={clearingResult}
                     buttonActivity={buttonActivityReset}
                     buttonClass={buttonClassReset}
                 />
             </div>
-
-
         </div>
     )
 }

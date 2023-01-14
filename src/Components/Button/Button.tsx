@@ -2,8 +2,6 @@ import React from "react";
 
 type PropsType = {
     buttonName?: string
-    number?: number
-    setNumber?: (number:number)=>void
     changeNumber?: (number: any)=>void
     buttonActivity?: boolean
     buttonClass?: string
